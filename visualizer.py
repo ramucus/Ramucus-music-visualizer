@@ -15,7 +15,7 @@ from pytorch_pretrained_biggan import (BigGAN, one_hot_from_names, truncated_noi
 #get input arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("--song",required=True)
-parser.add_argument("--resolution", default='720')
+parser.add_argument("--resolution", default='512')
 parser.add_argument("--duration", type=int)
 parser.add_argument("--pitch_sensitivity", type=int, default=220)
 parser.add_argument("--tempo_sensitivity", type=float, default=0.25)
@@ -24,7 +24,7 @@ parser.add_argument("--classes", nargs='+', type=int)
 parser.add_argument("--num_classes", type=int, default=12)
 parser.add_argument("--sort_classes_by_power", type=int, default=0)
 parser.add_argument("--jitter", type=float, default=0.5)
-parser.add_argument("--frame_length", type=int, default=720)
+parser.add_argument("--frame_length", type=int, default=512)
 parser.add_argument("--truncation", type=float, default=1)
 parser.add_argument("--smooth_factor", type=int, default=20)
 parser.add_argument("--batch_size", type=int, default=30)
@@ -48,10 +48,10 @@ model_name='biggan-deep-' + args.resolution
 frame_length=args.frame_length
 
 #set pitch sensitivity
-pitch_sensitivity=(300-args.pitch_sensitivity) * 720 / frame_length
+pitch_sensitivity=(300-args.pitch_sensitivity) * 512 / frame_length
 
 #set tempo sensitivity
-tempo_sensitivity=args.tempo_sensitivity * frame_length / 720
+tempo_sensitivity=args.tempo_sensitivity * frame_length / 512
 
 #set depth
 depth=args.depth
@@ -82,7 +82,7 @@ outname=args.output_file
 
 #set smooth factor
 if args.smooth_factor > 1:
-    smooth_factor=int(args.smooth_factor * 720 / frame_length)
+    smooth_factor=int(args.smooth_factor * 512 / frame_length)
 else:
     smooth_factor=args.smooth_factor
 
